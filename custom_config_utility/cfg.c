@@ -502,14 +502,14 @@ int main(int argc, char *argv[])
       return 1;
    }
 
-   settings = default_rotated_right_settings;
+   settings = default_rotated_left_settings;
    set_filenames();
 
    //  Return 0 on success, -1 on error.  Read settings into settings structure.
    if (!read_portcfg_settings(full_portcfg_filename))
    {
       printf("Unable to read settings from %s, using defaults values.\n", full_portcfg_filename);
-      settings = default_rotated_right_settings;
+      settings = default_rotated_left_settings;
       //create new settings file:
       settings_save_changes();
       //display one-time-only message:

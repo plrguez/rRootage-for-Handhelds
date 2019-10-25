@@ -14,7 +14,7 @@
 static const char *base_settings_path = ".rrootage/";
 
 portcfg_settings default_rotated_right_settings = {    
-   .laser_on_by_default    = 1,                        // Is laser on by default? (more comfortable on handhelds) 
+   .laser_on_by_default    = 0,                        // Is laser on by default? (more comfortable on handhelds) 
    .rotated                = SCREEN_ROTATED_RIGHT,     // Is screen rotated? Assigned to one of: 
                                                        //    SCREEN_HORIZ, SCREEN_ROTATED_LEFT, SCREEN_ROTATED_RIGHT
    .music                  = 1,                        // Is music enabled?
@@ -28,17 +28,17 @@ portcfg_settings default_rotated_right_settings = {
    .show_fps               = 0,                        // Show FPS counter
    .map                    = {
       .move     = MAP_DPAD,
-      .btn1     = MAP_R,      //Laser mapping
-      .btn2     = MAP_ANALOG, //Bomb mapping
-      .btn1_alt = MAP_A,      //Laser alternate mapping
-      .btn2_alt = MAP_Y,      //Bomb alternate mapping
+      .btn1     = MAP_A,      //Laser mapping
+      .btn2     = MAP_B, //Bomb mapping
+      .btn1_alt = MAP_Y,      //Laser alternate mapping
+      .btn2_alt = MAP_X,      //Bomb alternate mapping
       .pause    = MAP_START,  //Pause mapping
       .exit     = MAP_SELECT  //Exit to menu mapping 
    }
 };     
 
 portcfg_settings default_rotated_left_settings = {    
-   .laser_on_by_default    = 1,                           // Is laser on by default? (more comfortable on handhelds) 
+   .laser_on_by_default    = 0,                           // Is laser on by default? (more comfortable on handhelds) 
    .rotated                = SCREEN_ROTATED_LEFT,         // Is screen rotated? Assigned to one of: 
                                                           //    SCREEN_HORIZ, SCREEN_ROTATED_LEFT, SCREEN_ROTATED_RIGHT
    .music                  = 1,                           // Is music enabled?
@@ -51,13 +51,13 @@ portcfg_settings default_rotated_left_settings = {
    .no_wait                = 0,                        // Enables the --nowait option, where automatic bullet slowdown (and fps limiting) is disabled
    .show_fps               = 0,                        // Show FPS counter
    .map                    = {
-      .move     = MAP_ABXY,   //Movement mapping
-      .btn1     = MAP_SELECT, //Laser mapping
-      .btn2     = MAP_START,  //Bomb mapping
-      .btn1_alt = MAP_NONE,      //Laser alternate mapping
-      .btn2_alt = MAP_NONE,      //Bomb alternate mapping
-      .pause    = MAP_L,  //Pause mapping
-      .exit     = MAP_DPAD  //Exit to menu mapping 
+      .move     = MAP_ANALOG,   //Movement mapping
+      .btn1     = MAP_B, //Laser mapping
+      .btn2     = MAP_A,  //Bomb mapping
+      .btn1_alt = MAP_X,      //Laser alternate mapping
+      .btn2_alt = MAP_Y,      //Bomb alternate mapping
+      .pause    = MAP_START,  //Pause mapping
+      .exit     = MAP_SELECT  //Exit to menu mapping 
    }
 };     
 

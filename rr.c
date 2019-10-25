@@ -87,11 +87,11 @@ char *full_prefs_filename = NULL;               // Fully-qualified prefs filenam
 //   }
 //};     
 portcfg_settings settings = {    
-   .laser_on_by_default    = 1,                        // Is laser on by default? (more comfortable on handhelds) 
-   .rotated                = SCREEN_ROTATED_RIGHT,     // Is screen rotated? Assigned to one of: 
+   .laser_on_by_default    = 0,                        // Is laser on by default? (more comfortable on handhelds) 
+   .rotated                = SCREEN_ROTATED_LEFT,     // Is screen rotated? Assigned to one of: 
                                                        //    SCREEN_HORIZ, SCREEN_ROTATED_LEFT, SCREEN_ROTATED_RIGHT
    .music                  = 1,                        // Is music enabled?
-   .analog_deadzone        = ANALOG_DEADZONE_DEFAULT,  // Analog joystick deadzone
+   .analog_deadzone        = ANALOG_DEADZONE_DEFAULT,  // Analog oystick deadzone
    .draw_outlines          = DRAW_OUTLINES_IKA,        // Which mode of bullet-outline drawing to use
    .extra_lives            = 0,                        // Cheat which adds up to 6 extra lives at start 
                                                        //   (but disables ability to save new high scores)
@@ -100,10 +100,10 @@ portcfg_settings settings = {
    .no_wait                = 0,                        // Enables the --nowait option, where automatic bullet slowdown (and fps limiting) is disabled
    .show_fps               = 0,                        // Show FPS counter
    .map                    = {
-      .move     = MAP_DPAD,
-      .btn1     = MAP_R,      //Laser mapping
-      .btn2     = MAP_ANALOG, //Bomb mapping
-      .btn1_alt = MAP_A,      //Laser alternate mapping
+      .move     = MAP_ANALOG,
+      .btn1     = MAP_B,      //Laser mapping
+      .btn2     = MAP_A, //Bomb mapping
+      .btn1_alt = MAP_X,      //Laser alternate mapping
       .btn2_alt = MAP_Y,      //Bomb alternate mapping
       .pause    = MAP_START,  //Pause mapping
       .exit     = MAP_SELECT  //Exit to menu mapping 
@@ -742,8 +742,8 @@ int main (int argc, char *argv[])
       // ANALOG JOY:
       if (joy_analog) {
          Sint16 xmove, ymove;
-         xmove=SDL_JoystickGetAxis(joy_analog,0);
-         ymove=SDL_JoystickGetAxis(joy_analog,1);
+         xmove=SDL_JoystickGetAxis(joy_analog,2);
+         ymove=SDL_JoystickGetAxis(joy_analog,3);
          control_state[C_ANY_ANALOG] = 0;
          control_state[C_ANY_ANALOG] |=    control_state[CANALOGLEFT] 	= (xmove < -settings.analog_deadzone);
          control_state[C_ANY_ANALOG] |=    control_state[CANALOGRIGHT] 	= (xmove > settings.analog_deadzone);
