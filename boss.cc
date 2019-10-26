@@ -1080,6 +1080,7 @@ destroyBoss ()
    playChunk (5);
    setScreenShake (0, BOSS_PATTERN_CHANGE_CNT * 2);
    ship.absEng = 0;
+   rumble_level = 3; rumble_time = 40;
 }
 
 // Boss movements.
@@ -1558,6 +1559,7 @@ moveBoss ()
          boss.state = DESTROIED_END;
          playChunk (4);
          setScreenShake (1, BOSS_PATTERN_CHANGE_CNT);
+	 rumble_level = 3; rumble_time = 75;
          switch (mode) {
          case NORMAL_MODE:
             bs = 7000;
@@ -1688,6 +1690,7 @@ damageBoss (int dmg)
          boss.patternIdx = 0;
          clearFoes ();
          playChunk (5);
+	 rumble_level = 3; rumble_time = 40;
       }
       break;
    case LAST_ATTACK:

@@ -50,9 +50,6 @@
 
 static int noSound = 0;
 
-static int rumble_fd = 0;
-int rumble_level = 0;
-int rumble_time = 0;
 
 
 //senquack - modified code to store files in subdir, modified filenames:
@@ -122,6 +119,9 @@ portcfg_settings settings = {
    }
 };     
 
+static int rumble_fd = 0;
+int rumble_level = 0;
+int rumble_time = 0;
 //senquack
 // Create the specified directory if it doesn't yet exist. Returns 1 on success, 0 on error.
 int create_dir(const char *dir)

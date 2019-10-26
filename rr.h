@@ -23,8 +23,6 @@
 extern int status;
 extern int interval;
 extern int tick;
-extern int rumble_level;
-extern int rumble_time;
 
 #define TITLE 0
 #define IN_GAME 1
@@ -56,4 +54,7 @@ extern int ext_to_int_map[NUM_MAPS];  //Logical mapping between portcfg's extern
 
 
 int create_dir(const char *dir);
+
+extern int rumble_level;
+extern int rumble_time;
 #endif //RR_H

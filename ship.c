@@ -517,6 +517,8 @@ moveShip ()
          }
          ship.invCnt = 0;
          playChunk (10);
+	 rumble_level = 3;
+         if (rumble_time < 30) rumble_time = 45;
       }
       if (ship.grzInvCnt > 0) {
          ship.grzInvCnt--;
@@ -549,6 +551,8 @@ moveShip ()
          addShot (ship.pos.x, ship.pos.y, bossPos->x - ship.pos.x,
                   bossPos->y - ship.pos.y, ship.color);
          playChunk (11);
+	 rumble_level = 3;
+         if (rumble_time < 17) rumble_time = 17;
       }
       ship.d += 1.5f;
       break;
