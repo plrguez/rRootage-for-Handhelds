@@ -664,8 +664,7 @@ moveFoes ()
                   }
                   ship.grzf = 1;
                   fe->grzRng = 24;
-		  rumble_level = 3; 
-		  if (rumble_time < 10) rumble_time = 10;
+		  set_rumble(2,10);
                   addScore (50);
                }
                break;
@@ -679,8 +678,7 @@ moveFoes ()
                addScore (100);
                ship.absEng++;
                removeFoe (fe);
-	       rumble_level = 3;
-               if (rumble_time < 15) rumble_time = 15;
+	       set_rumble(2,15);
                continue;
             }
             break;

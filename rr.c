@@ -108,6 +108,7 @@ portcfg_settings settings = {
                                                        //   (but disables ability to save new high scores)
    .no_wait                = 0,                        // Enables the --nowait option, where automatic bullet slowdown (and fps limiting) is disabled
    .show_fps               = 0,                        // Show FPS counter
+   .rumble                 = 2,
    .map                    = {
       .move     = MAP_ANALOG,
       .btn1     = MAP_B,      //Laser mapping
@@ -241,6 +242,8 @@ int read_portcfg_settings (const char *filename)
          nowait = settings.no_wait;
       } else if (strcasecmp (str, "show_fps") == 0) {
          settings.show_fps = clamp (atoi (param), 0, 1);
+      } else if (strcasecmp (str, "rumble") == 0) {
+         settings.rumble = clamp (atoi (param), 0, MAX_RUMBLE);
       } else if (strcasecmp (str, "map_move") == 0) {
          settings.map.move = clamp(atoi (param), MAP_DPAD, NUM_MAPS-1);
       } else if (strcasecmp (str, "map_btn1") == 0) {
@@ -494,9 +497,18 @@ move ()
    moveScreenShake ();
 }
 
+void set_rumble(int new_rumble_level, int new_rumble_time) {
+	if (new_rumble_level <= settings.rumble) {
+		rumble_level = new_rumble_level;
+		if (new_rumble_time > rumble_time) {
+			rumble_time = new_rumble_time;
+		}
+	}
+}
+
 static void rumble (int frame)
 {
-   if (rumble_level > 0) {
+   if (rumble_level > 0 ) {
       rumble_time = rumble_time - frame;
       if (rumble_time > 0) {
          if(!rumble_fd) {
@@ -773,8 +785,13 @@ int main (int argc, char *argv[])
       // ANALOG JOY:
       if (joy_analog) {
          Sint16 xmove, ymove;
-         xmove=SDL_JoystickGetAxis(joy_analog,2);
-         ymove=SDL_JoystickGetAxis(joy_analog,3);
+	 if(settings.rotated==1){
+            xmove=SDL_JoystickGetAxis(joy_analog,2);
+            ymove=SDL_JoystickGetAxis(joy_analog,3);
+	 } else {
+            xmove=SDL_JoystickGetAxis(joy_analog,0);
+            ymove=SDL_JoystickGetAxis(joy_analog,1);
+	 }
          control_state[C_ANY_ANALOG] = 0;
          control_state[C_ANY_ANALOG] |=    control_state[CANALOGLEFT] 	= (xmove < -settings.analog_deadzone);
          control_state[C_ANY_ANALOG] |=    control_state[CANALOGRIGHT] 	= (xmove > settings.analog_deadzone);
@@ -800,15 +817,16 @@ int main (int argc, char *argv[])
 //         if (control_state[CY])  control_state[CB] = 0;
       }
       /* END POWER-SLIDER-BUG WORKAROUND */
+      //int tmp = control_state[CSTART];
+      //control_state[C_ANY_DPAD] = control_state[CUP] || control_state[CDOWN] ||
+      //                              control_state[CLEFT] || control_state[CRIGHT];
+      //control_state[C_ANY_ABXY] = control_state[CA] || control_state[CB] ||
+      //                              control_state[CX] || control_state[CY];
 
-      control_state[C_ANY_DPAD] = control_state[CUP] || control_state[CDOWN] ||
-                                    control_state[CLEFT] || control_state[CRIGHT];
-      control_state[C_ANY_ABXY] = control_state[CA] || control_state[CB] ||
-                                    control_state[CX] || control_state[CY];
-
-      control_state[C_ANY_DPAD_OR_ANALOG] = control_state[C_ANY_DPAD] || control_state[C_ANY_ANALOG];
+      //control_state[C_ANY_DPAD_OR_ANALOG] = control_state[C_ANY_DPAD] || control_state[C_ANY_ANALOG];
 
       // Handling pausing:
+      //control_state[CSTART] = tmp;
       if (control_state[ext_to_int_map[settings.map.pause]]) {
          if ( !pPrsd ) {
             if ( status == IN_GAME ) {

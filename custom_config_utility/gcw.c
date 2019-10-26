@@ -26,6 +26,7 @@ portcfg_settings default_rotated_right_settings = {
                                                        //   (but disables ability to save new high scores)
    .no_wait                = 0,                        // Enables the --nowait option, where automatic bullet slowdown (and fps limiting) is disabled
    .show_fps               = 0,                        // Show FPS counter
+   .rumble                 = 2,
    .map                    = {
       .move     = MAP_DPAD,
       .btn1     = MAP_A,      //Laser mapping
@@ -50,6 +51,7 @@ portcfg_settings default_rotated_left_settings = {
                                                        //   (but disables ability to save new high scores)
    .no_wait                = 0,                        // Enables the --nowait option, where automatic bullet slowdown (and fps limiting) is disabled
    .show_fps               = 0,                        // Show FPS counter
+   .rumble                 = 2,
    .map                    = {
       .move     = MAP_ANALOG,   //Movement mapping
       .btn1     = MAP_B, //Laser mapping
@@ -74,6 +76,7 @@ portcfg_settings default_horizontal_settings = {
                                                        //   (but disables ability to save new high scores)
    .no_wait                = 0,                        // Enables the --nowait option, where automatic bullet slowdown (and fps limiting) is disabled
    .show_fps               = 0,                        // Show FPS counter
+   .rumble                 = 2,
    .map                    = {
       .move     = MAP_DPAD,   //Movement mapping
       .btn1     = MAP_X,      //Laser mapping
@@ -147,6 +150,7 @@ int write_new_portcfg(const char *filename)
 	fprintf(f, "extra_bombs=%d\n", settings.extra_bombs);
 	fprintf(f, "no_wait=%d\n", settings.no_wait);
 	fprintf(f, "show_fps=%d\n", settings.show_fps);
+	fprintf(f, "rumble=%d\n", settings.rumble);
 	fprintf(f, "map_move=%d\n", settings.map.move);
 	fprintf(f, "map_btn1=%d\n", settings.map.btn1);
 	fprintf(f, "map_btn1_alt=%d\n", settings.map.btn1_alt);
@@ -227,6 +231,8 @@ int read_portcfg_settings(const char *filename)
 			settings.no_wait = clamp(atoi(param), 0, 1);
 		else if ( strcasecmp(str, "show_fps") == 0 )
 			settings.show_fps = clamp(atoi(param), 0, 1);
+		else if ( strcasecmp(str, "rumble") == 0 )
+			settings.rumble = clamp(atoi(param), 0, 1);
 		else if ( strcasecmp(str, "map_move") == 0 )
 			settings.map.move = clamp(atoi(param), MAP_DPAD, NUM_MAPS-1);
 		else if ( strcasecmp(str, "map_btn1") == 0 )

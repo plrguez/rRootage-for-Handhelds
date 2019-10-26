@@ -111,6 +111,29 @@ char* settings_get_text_for_show_fps()
    return settings_get_text_for_boolean(settings.show_fps);
 }
 
+//settings.rumble stuff:
+void settings_inc_rumble()
+{
+   settings.rumble++;
+   if(settings.rumble > MAX_RUMBLE) {
+	settings.rumble = 0;
+   }
+}
+
+void settings_dec_rumble()
+{
+   settings.rumble--;
+   if(settings.rumble < 0) {
+	settings.rumble = MAX_RUMBLE;
+   }
+}
+
+char* settings_get_text_for_rumble()
+{
+   static char* text[MAX_RUMBLE+1] = { "None", "Some", "Pants Wetting" } ;
+   return text[settings.rumble];
+}
+
 
 //settings.extra_lives stuff: 
 void settings_inc_extra_lives()
@@ -204,6 +227,13 @@ menu_entry game_settings_menu_entries[] = {
       .func_right = settings_toggle_show_fps,
       .func_left = settings_toggle_show_fps  },
    {  .is_special = 0,
+      .text = "Rumble Level:",
+      .desc_text = "Set the rumble level",
+      .func_get_val_text = settings_get_text_for_rumble,
+      .func_select = settings_inc_rumble,
+      .func_right = settings_inc_rumble,
+      .func_left = settings_dec_rumble  },
+   {  .is_special = 0,
       .text = "Extra lives (CHEAT):",
       .desc_text = "Warning: You will not be able to record new high scores",
       .func_get_val_text = settings_get_text_for_extra_lives,
@@ -234,7 +264,7 @@ menu_entry game_settings_menu_entries[] = {
 };
 
 menu game_settings_menu = {
-   .num_entries = 10,
+   .num_entries = 11,
    .cur_entry = 0,
    .entries = game_settings_menu_entries
 };

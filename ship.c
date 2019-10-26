@@ -428,7 +428,7 @@ moveShip ()
              && ship.invCnt < SHIP_INVINCIBLE_CNT_BASE - 30) {
             bomb--;
             bombUsed++;
-	    rumble_level = 3; rumble_time = 80;
+	    set_rumble(2,80);
             ship.bombCnt = 1;
             ship.bombWdt = 0;
             ship.bombPos = ship.pos;
@@ -454,7 +454,7 @@ moveShip ()
             ship.rfMtrDec += RF_METER_DEC;
             if (ship.rfMtrDec >= RF_METER_MAX) {
                ship.rfMtrDec = ship.rfMtr = 0;
-	       rumble_level = 3; rumble_time = 120;
+	       set_rumble(2,120);
                ship.rfCnt = 120;
                ship.invCnt = 150;
                playChunk (13);
@@ -517,8 +517,7 @@ moveShip ()
          }
          ship.invCnt = 0;
          playChunk (10);
-	 rumble_level = 3;
-         if (rumble_time < 30) rumble_time = 45;
+	 set_rumble(2,45);
       }
       if (ship.grzInvCnt > 0) {
          ship.grzInvCnt--;
@@ -551,8 +550,7 @@ moveShip ()
          addShot (ship.pos.x, ship.pos.y, bossPos->x - ship.pos.x,
                   bossPos->y - ship.pos.y, ship.color);
          playChunk (11);
-	 rumble_level = 3;
-         if (rumble_time < 17) rumble_time = 17;
+	 set_rumble(2,17);
       }
       ship.d += 1.5f;
       break;
@@ -732,7 +730,7 @@ void destroyShip ()
    addShipFrag(x, y);
    playChunk (7);
    shipUsed++;
-   rumble_level = 3; rumble_time=60;
+   set_rumble(1,40);
    resetPlayer ();
    if (decrementShip ()) {
       initGameover ();
@@ -750,7 +748,7 @@ void destroyShip() {
   addShipFrag(x, y);
   playChunk(7);
   shipUsed++;
-  rumble_level = 3; rumble_time=40;
+  set_rumble(1, 40);
   resetPlayer();
   if ( decrementShip() ) {
     initGameover();

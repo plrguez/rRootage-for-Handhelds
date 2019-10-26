@@ -52,9 +52,8 @@ extern char *full_prefs_filename;      // Fully-qualified prefs filename
 extern int control_state[CNUMCONTROLS];    // Tracks state of each individual button/control on physical device
 extern int ext_to_int_map[NUM_MAPS];  //Logical mapping between portcfg's external mapping to rrootage's internal
 
+extern void set_rumble(int new_rumble_level, int new_rumble_time);
 
 int create_dir(const char *dir);
 
-extern int rumble_level;
-extern int rumble_time;
 #endif //RR_H

@@ -30,6 +30,11 @@ char* settings_get_text_for_draw_outlines();
 void settings_toggle_show_fps();
 char* settings_get_text_for_show_fps();
 
+//settings.rumble stuff:
+void settings_inc_rumble();
+void settings_dev_rumble();
+char* settings_get_text_for_rumble();
+
 //settings.extra_lives stuff: 
 void settings_inc_extra_lives();
 void settings_dec_extra_lives();

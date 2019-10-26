@@ -49,6 +49,7 @@ typedef struct portcfg_settings
                               // (but disables ability to save new high scores)
    int no_wait;               // Enables the --nowait option, where automatic bullet slowdown (and fps limiting) is disabled
    int show_fps;              // Show FPS counter
+   int rumble;
    struct {
       int move;      //Movement mapping
       int btn1;      //Laser mapping
@@ -118,6 +119,7 @@ enum {   // For mapping internal to  externally-configurable controls (order of 
 #define ANALOG_DEADZONE_DEFAULT  8000
 #define MAX_EXTRA_LIVES 6
 #define MAX_EXTRA_BOMBS 6
+#define MAX_RUMBLE 2
 
 #endif //GCW
 
