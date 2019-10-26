@@ -428,6 +428,7 @@ moveShip ()
              && ship.invCnt < SHIP_INVINCIBLE_CNT_BASE - 30) {
             bomb--;
             bombUsed++;
+	    rumble_level = 3; rumble_time = 80;
             ship.bombCnt = 1;
             ship.bombWdt = 0;
             ship.bombPos = ship.pos;
@@ -453,6 +454,7 @@ moveShip ()
             ship.rfMtrDec += RF_METER_DEC;
             if (ship.rfMtrDec >= RF_METER_MAX) {
                ship.rfMtrDec = ship.rfMtr = 0;
+	       rumble_level = 3; rumble_time = 120;
                ship.rfCnt = 120;
                ship.invCnt = 150;
                playChunk (13);
@@ -726,6 +728,7 @@ void destroyShip ()
    addShipFrag(x, y);
    playChunk (7);
    shipUsed++;
+   rumble_level = 3; rumble_time=60;
    resetPlayer ();
    if (decrementShip ()) {
       initGameover ();
@@ -743,6 +746,7 @@ void destroyShip() {
   addShipFrag(x, y);
   playChunk(7);
   shipUsed++;
+  rumble_level = 3; rumble_time=40;
   resetPlayer();
   if ( decrementShip() ) {
     initGameover();

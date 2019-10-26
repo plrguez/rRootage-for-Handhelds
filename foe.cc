@@ -35,6 +35,7 @@ extern "C"
 
 static Foe foe[FOE_MAX];
 
+
 void
 removeFoeCommand (Foe * fe)
 {
@@ -663,6 +664,7 @@ moveFoes ()
                   }
                   ship.grzf = 1;
                   fe->grzRng = 24;
+		  rumble_level = 3; rumble_time = 17;
                   addScore (50);
                }
                break;

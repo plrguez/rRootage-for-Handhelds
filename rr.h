@@ -23,6 +23,8 @@
 extern int status;
 extern int interval;
 extern int tick;
+extern int rumble_level;
+extern int rumble_time;
 
 #define TITLE 0
 #define IN_GAME 1
@@ -51,6 +53,7 @@ extern portcfg_settings settings;    //portcfg is our global "current-settings"
 extern char *full_prefs_filename;      // Fully-qualified prefs filename
 extern int control_state[CNUMCONTROLS];    // Tracks state of each individual button/control on physical device
 extern int ext_to_int_map[NUM_MAPS];  //Logical mapping between portcfg's external mapping to rrootage's internal
+
 
 int create_dir(const char *dir);
 #endif //RR_H

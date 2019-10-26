@@ -41,7 +41,19 @@
 #include "soundmanager.h"
 #include "attractmanager.h"
 
+#include <sys/ioctl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+
 static int noSound = 0;
+
+static int rumble_fd = 0;
+int rumble_level = 0;
+int rumble_time = 0;
+
 
 //senquack - modified code to store files in subdir, modified filenames:
 #if defined(GP2X) || defined(WIZ)
@@ -482,6 +494,25 @@ move ()
    moveScreenShake ();
 }
 
+static void rumble (int frame)
+{
+   if (rumble_level > 0) {
+      rumble_time = rumble_time - frame;
+      if (rumble_time > 0) {
+         if(!rumble_fd) {
+            rumble_fd = open("/dev/input/event1", O_RDWR);
+         }
+         return;
+      } else {
+         rumble_level = 0;
+      }
+   } 
+   if(rumble_fd) {
+      close(rumble_fd);
+      rumble_fd = 0;
+   }
+}
+
 
 static void draw ()
 {
@@ -821,6 +852,7 @@ int main (int argc, char *argv[])
 
       drawGLSceneStart ();
       draw ();
+      rumble(frame);
       drawGLSceneEnd ();
       swapGLScene ();
       //senquack - at least try to be nice to other processes:

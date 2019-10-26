@@ -16,6 +16,7 @@ extern "C"
 {
 #include "vector.h"
 #include "foe_mtd.h"
+#include "rr.h"
 }
 
 #include "bulletml/bulletmlparser.h"
@@ -33,6 +34,7 @@ typedef int GLfixed;
 #define BULLET 2
 
 #define NOT_EXIST_TMP (NOT_EXIST-1)
+
 
 //senquack TODO: make sure conversion to floats from doubles here didn't mess up the bullet patterns, etc:
 struct foe
