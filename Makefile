@@ -19,7 +19,7 @@ DEFAULT_CFLAGS = -DGCW -DLINUX -O2 -mno-shared -Wall -DNDEBUG -I./bulletml \
 #senquack TODO: remember to add WIZ define to Makefile
 #LDFLAGS        =  -static  `/usr/local/gp2xdev/bin/sdl-config --libs` -lpng -L. -lbulletml -lSDL_mixer -lSDL_image -lpng -mwindows -lstdc++ -lGL -lm -lpthread -lz -lpng -ljpeg -lgpu940 -lsmpeg -lvorbisidec `/usr/local/gp2xdev/bin/sdl-config --libs`
 #     -lglu32 -lopengl32 -lmingw32 -lmingwex
-LDFLAGS        = `/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/bin/sdl-config --libs` -lGLESv1_CM -lEGL \
+LDFLAGS        = `/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/bin/sdl-config --libs` -lGLESv1_CM -lEGL -lshake \
                  -L./bulletml/ -lbulletml -lSDL_mixer -lSDL_image -lstdc++ -lm -lpthread -lz 
 
 #MORE_CFLAGS = -DLINUX -O0 -Wall -g

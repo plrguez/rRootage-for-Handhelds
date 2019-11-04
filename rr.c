@@ -47,8 +47,14 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include <shake.h>
+
 
 static int noSound = 0;
+
+Shake_Device *device;
+Shake_Effect r_effect, r_effect1;
+int r_effect_id, r_effect_id1;
 
 
 
@@ -402,6 +408,7 @@ quitLast ()
    savePreference ();
    closeFoes ();
    closeBarragemanager ();
+   closeRumble ();
    closeSDL ();
    SDL_Quit ();
    exit (1);
@@ -511,18 +518,49 @@ static void rumble (int frame)
    if (rumble_level > 0 ) {
       rumble_time = rumble_time - frame;
       if (rumble_time > 0) {
-         if(!rumble_fd) {
-            rumble_fd = open("/dev/input/event1", O_RDWR);
-         }
+	      Shake_Stop(device, r_effect_id);
+	      Shake_Stop(device, r_effect_id1);
+         Shake_Play(device, r_effect_id);
+         Shake_Play(device, r_effect_id1);
          return;
       } else {
          rumble_level = 0;
       }
    } 
-   if(rumble_fd) {
-      close(rumble_fd);
-      rumble_fd = 0;
-   }
+	Shake_Stop(device, r_effect_id);
+	Shake_Stop(device, r_effect_id1);
+}
+
+static void initRumble () {
+   Shake_Init();
+   device = Shake_Open(0);
+
+   Shake_InitEffect(&r_effect, SHAKE_EFFECT_RUMBLE);
+   r_effect.u.rumble.strongMagnitude = SHAKE_RUMBLE_STRONG_MAGNITUDE_MAX;
+   r_effect.u.rumble.weakMagnitude = SHAKE_RUMBLE_STRONG_MAGNITUDE_MAX*0.9;
+   r_effect.length = 20;
+   r_effect.delay = 0;
+
+	r_effect_id = Shake_UploadEffect(device, &r_effect);
+
+   Shake_InitEffect(&r_effect1, SHAKE_EFFECT_RUMBLE);
+   r_effect1.u.rumble.strongMagnitude = SHAKE_RUMBLE_STRONG_MAGNITUDE_MAX;
+   r_effect1.u.rumble.weakMagnitude = SHAKE_RUMBLE_STRONG_MAGNITUDE_MAX*0.9;
+   r_effect1.length = 380;
+   r_effect1.delay = 0;
+
+	r_effect_id1 = Shake_UploadEffect(device, &r_effect1);
+
+}
+
+void closeRumble() {
+	Shake_Stop(device, r_effect_id);
+	Shake_Stop(device, r_effect_id1);
+
+   Shake_EraseEffect(device, r_effect_id);
+   Shake_EraseEffect(device, r_effect_id1);
+   Shake_Close(device);
+   Shake_Quit();
 }
 
 
@@ -725,6 +763,7 @@ int main (int argc, char *argv[])
 
    initDegutil ();
    initSDL ();
+   initRumble ();
    initFirst ();
    initTitle ();
 
