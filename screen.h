@@ -12,6 +12,18 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#ifdef GCW
+#include <EGL/egl.h>
+#include <EGL/eglext.h>
+
+#include <gbm.h>
+#include <libdrm/drm_fourcc.h>
+
+#include <libdrm/drm.h>
+#include <xf86drm.h>
+#include <xf86drmMode.h>
+#endif
+
 // For GL type defines:
 #include "GLES/gl.h"
 #include "GLES/egl.h"
@@ -137,6 +149,7 @@ void drawGLSceneEnd ();
 void swapGLScene ();
 
 int initGLES();
+int8_t EGL_Init_DRM( uint16_t *width, uint16_t *height );
 int closeGLES();
 
 //senquack - added our own copy of gluPerspective

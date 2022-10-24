@@ -752,7 +752,10 @@ int main (int argc, char *argv[])
    } else {
       printf("Failed to read settings, using defaults.\n");
    }
-   free( full_portcfg_filename );   // Don't need anymore 
+   free( full_portcfg_filename );   // Don't need anymore q
+#ifdef GCW
+   chdir(dirname(argv[0]));
+#endif
 
    nowait = settings.no_wait;
 

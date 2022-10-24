@@ -29,6 +29,9 @@
 *.hex
 fpbench
 fpbench.s
+rr_cfg
+rr
+xmltest
 
 # Vim 
 *.swp

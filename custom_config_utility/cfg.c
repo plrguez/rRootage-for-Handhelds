@@ -495,6 +495,9 @@ void exit_current_menu()
 
 int main(int argc, char *argv[])
 {
+#ifdef GCW
+   chdir(dirname(argv[0]));
+#endif
    // Initialize graphics, load sprits/fonts etc
    if (!initialize())
    {

@@ -13,14 +13,15 @@ CXX = /opt/gcw0-toolchain/usr/bin/mipsel-gcw0-linux-uclibc-g++
 PROG   = $(NAME)
 
 #DEFAULT_CFLAGS = `/usr/local/gp2xdev/bin/sdl-config --cflags`  -I/src/gpu940/include/
-DEFAULT_CFLAGS = -DGCW -DLINUX -O2 -mno-shared -Wall -DNDEBUG -I./bulletml \
+DEFAULT_CFLAGS = -DGCW -DLINUX -O2 -DEGL_NO_X11 -mno-shared -Wall -DNDEBUG -I./bulletml \
                  `/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/bin/sdl-config --cflags`  \
-                 -I/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include
+                 -I/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include \
+                 -I/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/include/libdrm
 #senquack TODO: remember to add WIZ define to Makefile
 #LDFLAGS        =  -static  `/usr/local/gp2xdev/bin/sdl-config --libs` -lpng -L. -lbulletml -lSDL_mixer -lSDL_image -lpng -mwindows -lstdc++ -lGL -lm -lpthread -lz -lpng -ljpeg -lgpu940 -lsmpeg -lvorbisidec `/usr/local/gp2xdev/bin/sdl-config --libs`
 #     -lglu32 -lopengl32 -lmingw32 -lmingwex
 LDFLAGS        = `/opt/gcw0-toolchain/usr/mipsel-gcw0-linux-uclibc/sysroot/usr/bin/sdl-config --libs` -lGLESv1_CM -lEGL -lshake \
-                 -L./bulletml/ -lbulletml -lSDL_mixer -lSDL_image -lstdc++ -lm -lpthread -lz 
+                 -L./bulletml/ -lbulletml -lSDL_mixer -lSDL_image -lstdc++ -lm -lpthread -lz -ldrm -lgbm
 
 #MORE_CFLAGS = -DLINUX -O0 -Wall -g
 #MORE_CFLAGS = -DLINUX -O2 -Wall -DNDEBUG 
